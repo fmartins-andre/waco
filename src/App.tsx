@@ -37,15 +37,17 @@ function App () {
     const CHROME_CURRENT_TAB = { active: true, currentWindow: true }
     const phone = `${phonePrefix}${phoneNumber}`
 
-    chrome.tabs.query(CHROME_CURRENT_TAB, (tabs) => {
-      chrome.tabs.sendMessage(tabs[0].id!, { phone }, (response) => {
-        if (response?.success) {
-          window.close()
-        } else {
-          setSuccess(false)
-        }
+    if (phone.length > 8) {
+      chrome.tabs.query(CHROME_CURRENT_TAB, (tabs) => {
+        chrome.tabs.sendMessage(tabs[0].id!, { phone }, (response) => {
+          if (response?.success) {
+            window.close()
+          } else {
+            setSuccess(false)
+          }
+        })
       })
-    })
+    }
   }
 
   const handleInput = (value: string): number | null => {
