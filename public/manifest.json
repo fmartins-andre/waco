@@ -1,25 +1,36 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
-  "icons": [
+  "short_name": "WACO",
+  "name": "Whatsapp Contact Opener",
+  "description": "Open contacts conversations in Whatsapp Web, even if it's not saved!",
+  "manifest_version": 3,
+  "version": "0.1.0",
+  "icons": {
+    "16": "logo192.png",
+    "48": "logo192.png",
+    "128": "logo192.png"
+  },
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": "logo192.png"
+  },
+  "content_scripts": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
+      "matches": ["https://web.whatsapp.com/*"],
+      "js": ["./static/js/content.js"],
+      "all_frames": false,
+      "run_at": "document_end"
     }
   ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "permissions": ["tabs", "storage"],
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "windows": "Alt+Shift+C",
+        "mac": "Alt+Shift+C",
+        "chromeos": "Alt+Shift+C",
+        "linux": "Alt+Shift+C"
+      },
+      "description": "Opens Whatsapp contacts to chat with"
+    }
+  }
 }
